@@ -1,0 +1,15 @@
+meta {
+  name: get transacoes
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/transacoes
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
