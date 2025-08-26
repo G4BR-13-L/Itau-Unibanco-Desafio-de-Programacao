@@ -3,6 +3,7 @@ use env_logger::Env;
 use infrastructure::http::routes::config as routes_config;
 
 mod application {
+    pub mod dto;
     pub mod transacao_service;
 }
 

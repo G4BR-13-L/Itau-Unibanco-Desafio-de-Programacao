@@ -1,0 +1,22 @@
+meta {
+  name: create transaccao
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/transacao
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "valor":"2300",
+    "dataHora":"1234"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
