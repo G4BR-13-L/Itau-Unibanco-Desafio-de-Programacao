@@ -9,6 +9,11 @@ use crate::domain::transacao::Transacao;
 
 pub type Repo = web::Data<Arc<RwLock<HashMap<Uuid, Transacao>>>>;
 
+pub fn delete_all(repo: &Repo) {
+    let mut map = repo.write().unwrap();
+    map.clear();
+}
+
 pub fn save(repo: &Repo, transacao: Transacao) -> Transacao {
     let mut map = repo.write().unwrap();
     let id = Uuid::new_v4();
