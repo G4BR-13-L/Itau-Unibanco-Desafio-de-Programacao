@@ -9,7 +9,6 @@ use crate::{
 pub fn estatisticas(repo: &Repo) -> EstatisticaResponse {
     let transacoes = transacao_repo::find_last_minute_transacoes(&repo);
 
-    // Se não houver transações, retorne valores padrão
     if transacoes.is_empty() {
         return EstatisticaResponse {
             count: 0,
@@ -44,4 +43,3 @@ pub fn estatisticas(repo: &Repo) -> EstatisticaResponse {
         max,
     }
 }
-fn get_average() {}
