@@ -1,0 +1,52 @@
+name: Rust CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 🔹 Checkout do repositório
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 🔹 Instalação do Rust (stable)
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          components: clippy, rustfmt
+
+      # 🔹 Cache do cargo (para builds mais rápidos)
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      # 🔹 Build
+      - name: Build
+        run: cargo build --verbose
+
+      # 🔹 Testes
+      - name: Run tests
+        run: cargo test --verbose
+
+      # 🔹 Clippy (lint)
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      # 🔹 Check fmt (formatação)
+      - name: Check formatting
+        run: cargo fmt --all -- --check
