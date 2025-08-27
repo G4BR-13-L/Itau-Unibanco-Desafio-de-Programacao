@@ -9,5 +9,7 @@ pub fn config(cfg: &mut web::ServiceConfig) {
                 .route("", web::post().to(transacao_handler::create))
                 .route("", web::delete().to(transacao_handler::delete_all)),
         )
-        .service(web::scope("/estatistica").route("", web::get().to(estatistica_handler::hello)));
+        .service(
+            web::scope("/estatistica").route("", web::get().to(estatistica_handler::estatisticas)),
+        );
 }
