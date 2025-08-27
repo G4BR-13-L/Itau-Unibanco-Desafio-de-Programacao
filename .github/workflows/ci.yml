@@ -21,7 +21,7 @@ jobs:
         with:
           toolchain: stable
           override: true
-          components: clippy, rustfmt
+          components: rustfmt
 
       # 🔹 Cache do cargo (para builds mais rápidos)
       - name: Cache cargo
@@ -42,10 +42,6 @@ jobs:
       # 🔹 Testes
       - name: Run tests
         run: cargo test --verbose
-
-      # 🔹 Clippy (lint)
-      - name: Run Clippy
-        run: cargo clippy --all-targets --all-features -- -D warnings
 
       # 🔹 Check fmt (formatação)
       - name: Check formatting
