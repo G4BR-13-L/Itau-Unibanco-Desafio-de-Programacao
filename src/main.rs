@@ -44,9 +44,9 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .configure(routes_config)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("0.0.0.0", 8080))? // <--- alterado aqui
     .run();
-    println!("Server running at http://localhost:{}/", "8080");
+    println!("Server running at http://0.0.0.0:{}/", "8080");
 
     server.await
 }
